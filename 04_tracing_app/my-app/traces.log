@@ -1,0 +1,70 @@
+[59723db8] 714d352d | 15:24:15.707 -> 15:24:15.810 | bonjour-eql-request (102ms) | FINISHED | result=success
+[35c0a364] a43ae8bb | 15:24:59.277 -> 15:24:59.326 | validate-user (49ms) | FINISHED | validation=success
+[35c0a364] 884bd714 | 15:24:59.327 -> 15:24:59.419 | database-query (92ms) | FINISHED | query=SELECT * FROM users WHERE id=123
+[35c0a364] c5b2a114 | 15:24:59.276 -> 15:24:59.420 | get-user-request (144ms) | FINISHED | user.id=123
+[6b4792fc] 917d7fbc | 15:26:40.883 -> 15:26:40.926 | validate-user (42ms) | FINISHED | validation=success
+[6b4792fc] d2b443c3 | 15:26:40.931 -> 15:26:41.010 | database-query (78ms) | FINISHED | query=SELECT * FROM users WHERE id=123
+[6b4792fc] 8a6fa30c | 15:26:40.881 -> 15:26:41.011 | get-user-request (129ms) | FINISHED | user.id=123
+[e973c758] aef774cb | 15:26:41.349 -> 15:26:41.397 | error-simulation (47ms) | FINISHED | 
+[6991f33f] 7b181576 | 15:28:21.893 -> 15:28:22.002 | bonjour-eql-request (109ms) | FINISHED | result=success
+[ab1a0899] 17b2c207 | 15:28:22.030 -> 15:28:22.061 | validate-user (31ms) | FINISHED | validation=success
+[ab1a0899] bfd5c896 | 15:28:22.063 -> 15:28:22.137 | database-query (74ms) | FINISHED | query=SELECT * FROM users WHERE id=123
+[ab1a0899] f275bc91 | 15:28:22.030 -> 15:28:22.138 | get-user-request (108ms) | FINISHED | user.id=123
+[9404ef61] 3638794d | 15:28:22.168 -> 15:28:22.277 | data-processing (108ms) | FINISHED | data.size=28
+[5269099a] 450ebc15 | 15:28:22.168 -> 15:28:22.277 | process-data (109ms) | FINISHED | result=success
+[78e4c129] a0d65980 | 15:28:22.294 -> 15:28:22.306 | error-simulation (12ms) | FINISHED | 
+[fa700e6f] b56c5afe | 15:28:22.325 -> 15:28:22.406 | bonjour-eql-request (81ms) | FINISHED | result=success
+[354db0f5] b3cfd833 | 15:28:22.423 -> 15:28:22.458 | validate-user (35ms) | FINISHED | validation=success
+[354db0f5] 6e034046 | 15:28:22.459 -> 15:28:22.497 | database-query (38ms) | FINISHED | query=SELECT * FROM users WHERE id=user1
+[354db0f5] 809dbd49 | 15:28:22.422 -> 15:28:22.498 | get-user-request (75ms) | FINISHED | user.id=user1
+[a62b555f] e4d3d46e | 15:28:22.514 -> 15:28:22.546 | error-simulation (32ms) | FINISHED | error=Erreur simulée pour démonstration du tracing
+[1c44b4b8] 497f6c9d | 15:28:22.561 -> 15:28:22.610 | error-simulation (49ms) | FINISHED | 
+[1c9099a3] 38b38ff3 | 15:28:23.628 -> 15:28:23.714 | bonjour-eql-request (86ms) | FINISHED | result=success
+[d7d84276] ea7a2ef7 | 15:28:23.730 -> 15:28:23.765 | validate-user (34ms) | FINISHED | validation=success
+[d7d84276] 9bb795f6 | 15:28:23.765 -> 15:28:23.805 | database-query (39ms) | FINISHED | query=SELECT * FROM users WHERE id=user2
+[d7d84276] 6b3238ab | 15:28:23.730 -> 15:28:23.805 | get-user-request (75ms) | FINISHED | user.id=user2
+[eb440ff0] 771eb752 | 15:28:23.822 -> 15:28:23.855 | error-simulation (32ms) | FINISHED | 
+[7b38f2c2] 11247288 | 15:28:24.872 -> 15:28:25.030 | bonjour-eql-request (158ms) | FINISHED | result=success
+[1e822370] 8005e2d1 | 15:28:25.047 -> 15:28:25.069 | validate-user (22ms) | FINISHED | validation=success
+[1e822370] 00e7586b | 15:28:25.070 -> 15:28:25.132 | database-query (62ms) | FINISHED | query=SELECT * FROM users WHERE id=user3
+[1e822370] d2099d15 | 15:28:25.047 -> 15:28:25.133 | get-user-request (86ms) | FINISHED | user.id=user3
+[813a3a71] 90d80faf | 15:28:25.151 -> 15:28:25.191 | error-simulation (40ms) | FINISHED | 
+[7fd8ecea] 0b758f7c | 15:31:45.338 -> 15:31:45.356 | error-simulation (17ms) | FINISHED | 
+[047c05a5] b31b8b28 | 16:15:57.415 -> 16:15:57.451 | error-simulation (35ms) | FINISHED | 
+[73bddd48] e2052572 | 16:16:19.936 -> 16:16:20.060 | bonjour-eql-request (123ms) | FINISHED | result=success
+[ff7c553e] 590fd1f6 | 16:16:20.094 -> 16:16:20.132 | validate-user (37ms) | FINISHED | validation=success
+[ff7c553e] 886d748a | 16:16:20.133 -> 16:16:20.173 | database-query (39ms) | FINISHED | query=SELECT * FROM users WHERE id=123
+[ff7c553e] 00311067 | 16:16:20.094 -> 16:16:20.173 | get-user-request (79ms) | FINISHED | user.id=123
+[2e250fb0] 20cc9435 | 16:16:20.200 -> 16:16:20.271 | data-processing (70ms) | FINISHED | data.size=28
+[3ba0714b] 46401128 | 16:16:20.200 -> 16:16:20.271 | process-data (71ms) | FINISHED | result=success
+[1c2179c2] d3d400d0 | 16:16:20.290 -> 16:16:20.333 | error-simulation (43ms) | FINISHED | 
+[8f73959b] 2f33ace4 | 16:16:20.350 -> 16:16:20.470 | bonjour-eql-request (120ms) | FINISHED | result=success
+[36d33ba6] 8efed46f | 16:16:20.488 -> 16:16:20.512 | validate-user (23ms) | FINISHED | validation=success
+[36d33ba6] 9b330134 | 16:16:20.512 -> 16:16:20.551 | database-query (38ms) | FINISHED | query=SELECT * FROM users WHERE id=user1
+[36d33ba6] 9338eba9 | 16:16:20.488 -> 16:16:20.551 | get-user-request (63ms) | FINISHED | user.id=user1
+[36492100] 74b7d8a8 | 16:16:20.568 -> 16:16:20.583 | error-simulation (15ms) | FINISHED | error=Erreur simulée pour démonstration du tracing
+[3d1fd342] 89f625ad | 16:16:20.600 -> 16:16:20.641 | error-simulation (41ms) | FINISHED | 
+[582e17db] 80df8a97 | 16:16:21.661 -> 16:16:21.837 | bonjour-eql-request (176ms) | FINISHED | result=success
+[2b00c31b] 0cffbcaf | 16:16:21.854 -> 16:16:21.897 | validate-user (43ms) | FINISHED | validation=success
+[2b00c31b] 0b95a9e0 | 16:16:21.898 -> 16:16:21.991 | database-query (93ms) | FINISHED | query=SELECT * FROM users WHERE id=user2
+[2b00c31b] 9952648d | 16:16:21.854 -> 16:16:21.992 | get-user-request (138ms) | FINISHED | user.id=user2
+[e98cf693] 22a37dfd | 16:16:22.013 -> 16:16:22.025 | error-simulation (11ms) | FINISHED | 
+[a339b792] 0d1f4863 | 16:16:23.047 -> 16:16:23.162 | bonjour-eql-request (114ms) | FINISHED | result=success
+[10020130] 533440fa | 16:16:23.179 -> 16:16:23.223 | validate-user (44ms) | FINISHED | validation=success
+[10020130] 9a3ffa45 | 16:16:23.224 -> 16:16:23.278 | database-query (54ms) | FINISHED | query=SELECT * FROM users WHERE id=user3
+[10020130] a53c1b62 | 16:16:23.178 -> 16:16:23.279 | get-user-request (100ms) | FINISHED | user.id=user3
+[5a1459ca] a7bd2823 | 16:16:23.295 -> 16:16:23.310 | error-simulation (15ms) | FINISHED | 
+[4d2074b9] ba5aa93e | 16:17:12.252 -> 16:17:12.274 | error-simulation (22ms) | FINISHED | 
+[ad8ab7cb] cc2a61d2 | 16:17:17.413 -> 16:17:17.424 | error-simulation (10ms) | FINISHED | error=Erreur simulée pour démonstration du tracing
+[08d31a47] e6db696d | 16:17:23.714 -> 16:17:23.737 | error-simulation (23ms) | FINISHED | 
+[f3310c21] 5086c30e | 16:17:29.699 -> 16:17:29.710 | error-simulation (10ms) | FINISHED | error=Erreur simulée pour démonstration du tracing
+[7c12b2b9] bcb5b3e5 | 16:17:35.985 -> 16:17:36.008 | error-simulation (23ms) | FINISHED | 
+[533d65bf] b42e2a8d | 16:18:12.125 -> 16:18:12.176 | error-simulation (51ms) | FINISHED | error=Erreur simulée pour démonstration du tracing
+[460d9e5a] e49e7695 | 16:18:18.243 -> 16:18:18.284 | error-simulation (40ms) | FINISHED | error=Erreur simulée pour démonstration du tracing
+[4147af82] f570fb31 | 16:18:23.819 -> 16:18:23.866 | error-simulation (47ms) | FINISHED | 
+[8272c9ce] 231952e1 | 16:18:29.781 -> 16:18:29.816 | error-simulation (34ms) | FINISHED | error=Erreur simulée pour démonstration du tracing
+[c8724ae2] 2c1e90b3 | 16:19:19.350 -> 16:19:19.365 | error-simulation (15ms) | FINISHED | 
+[e33f1130] 2720e475 | 16:21:13.650 -> 16:21:13.669 | error-simulation (19ms) | FINISHED | 
+[7c71dad7] 02a16163 | 16:26:42.868 -> 16:26:42.894 | error-simulation (26ms) | FINISHED | error=Erreur simulée pour démonstration du tracing
+[96d70de1] a6e56af2 | 16:30:30.732 -> 16:30:30.776 | error-simulation (43ms) | FINISHED | 
+[46c1d48e] 4f4bd841 | 16:34:04.928 -> 16:34:04.956 | error-simulation (28ms) | FINISHED | error=Erreur simulée pour démonstration du tracing

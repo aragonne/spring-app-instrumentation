@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Trace Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex: 1;
+        }
+        .trace-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .trace-item {
+            border-left: 4px solid #667eea;
+            padding: 10px 15px;
+            margin: 10px 0;
+            background: #f8f9ff;
+            border-radius: 0 8px 8px 0;
+        }
+        .trace-item.error {
+            border-left-color: #e74c3c;
+            background: #fdf2f2;
+        }
+        .trace-id {
+            font-weight: bold;
+            color: #667eea;
+        }
+        .trace-operation {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .trace-details {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .duration {
+            background: #e8f4fd;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+        .status {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+            color: white;
+        }
+        .status.finished { background: #27ae60; }
+        .status.error { background: #e74c3c; }
+        .status.started { background: #f39c12; }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .btn:hover {
+            background: #5a6fd8;
+        }
+        .btn.danger {
+            background: #e74c3c;
+        }
+        .btn.danger:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 Simple Trace Viewer</h1>
+        <p>Visualiseur de traces simple pour démonstration</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <h3>Traces Actives</h3>
+            <h2 th:text="${activeCount}">0</h2>
+        </div>
+        <div class="stat-card">
+            <h3>Total Traces</h3>
+            <h2 th:text="${totalCount}">0</h2>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn" onclick="location.reload()">🔄 Actualiser</button>
+        <button class="btn danger" onclick="clearTraces()">🗑️ Vider les traces</button>
+    </div>
+
+    <div class="trace-container">
+        <h2>Traces Collectées</h2>
+        <div th:if="${traces.empty}">
+            <p>Aucune trace disponible. Effectuez quelques requêtes sur l'API pour voir les traces apparaître.</p>
+        </div>
+        <div th:each="trace : ${traces}" 
+             th:class="${trace.status == 'ERROR'} ? 'trace-item error' : 'trace-item'">
+            <div class="trace-operation" th:text="${trace.operationName}">Operation</div>
+            <div class="trace-details">
+                <span class="trace-id" th:text="'ID: ' + ${trace.traceId} + ':' + ${trace.spanId}">ID</span>
+                <span th:if="${trace.parentSpanId}" th:text="' (parent: ' + ${trace.parentSpanId} + ')'"></span>
+                <br>
+                <span th:text="'Début: ' + ${#temporals.format(trace.startTime, 'HH:mm:ss.SSS')}">Start</span>
+                <span th:if="${trace.endTime}" th:text="' → Fin: ' + ${#temporals.format(trace.endTime, 'HH:mm:ss.SSS')}">End</span>
+                <br>
+                <span class="duration" th:text="${trace.durationMs} + ' ms'">Duration</span>
+                <span th:class="'status ' + ${#strings.toLowerCase(trace.status)}" th:text="${trace.status}">Status</span>
+                <span th:if="${trace.tags}" th:text="' | ' + ${trace.tags}">Tags</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function clearTraces() {
+            if (confirm('Êtes-vous sûr de vouloir vider toutes les traces ?')) {
+                fetch('/traces/clear')
+                    .then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                        location.reload();
+                    });
+            }
+        }
+
+        // Auto-refresh toutes les 5 secondes
+        setInterval(() => {
+            location.reload();
+        }, 5000);
+    </script>
+</body>
+</html>

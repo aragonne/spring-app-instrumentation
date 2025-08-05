@@ -1,0 +1,60 @@
+package com.exemple.demo;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.ThreadLocalRandom;
+
+@RestController
+public class BonjourEQLController {
+
+    @GetMapping("/bonjour-eql")
+    public String direBonjourEQL() {
+        // Simuler un traitement avec délai variable
+        try {
+            Thread.sleep(ThreadLocalRandom.current().nextInt(50, 200));
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return "Bonjour EQL, Voici Spring avec OpenTelemetry!";
+    }
+    @PostMapping("/metrics/custom")
+    public String recordCustomMetric(@RequestParam String operation, @RequestParam double value) {
+        metricsService.recordCustomMetric(operation, value);
+        return "Métrique personnalisée enregistrée: " + operation + " = " + value;
+    }
+    
+    @GetMapping("/user/{id}")
+    public String getUser(@PathVariable String id) {
+        // Fake work simulation on database query
+        try {
+            Thread.sleep(ThreadLocalRandom.current().nextInt(20, 100));
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return "Utilisateur: " + id;
+    }
+
+    @PostMapping("/data")
+    public String postData(@RequestBody String data) {
+        // Fake work simulation on data processing
+        try {
+            Thread.sleep(ThreadLocalRandom.current().nextInt(30, 150));
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return "Données reçues: " + data.length() + " caractères";
+    }
+
+    @GetMapping("/error")
+    public String simulateError() {
+        // Fake error simulation
+        if (ThreadLocalRandom.current().nextBoolean()) {
+            throw new RuntimeException("Erreur simulée pour démonstration OpenTelemetry");
+        }
+        return "Pas d'erreur cette fois!";
+    }
+}
