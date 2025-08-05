@@ -218,7 +218,23 @@ It provides a set of endpoints that you can use to monitor and manage your appli
   </dependency>
 ```
 
-2 Add the Actuator endpoint in hte BonjourEQLController
+2 Add the Actuator endpoint in the BonjourEQLController
+Header
+
+```Java
+package com.exemple.demo;
+
+import java.util.concurrent.ThreadLocalRandom;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+```
+
+Body
 
 ```java
 
@@ -367,7 +383,7 @@ We will use the Java agent from JMX. It is easy to use and it is a standard Java
 1 Download the Java agent
 
 ```bash
-  wget -O jmx_prometheus_javaagent.jar https://github.com/prometheus/jmx_prometheus_javaagent/releases/latest/download/jmx_prometheus_javaagent.jar
+  wget -O jmx_prometheus_javaagent.jar https://github.com/prometheus/jmx_exporter/releases/download/1.3.0/jmx_prometheus_javaagent-1.3.0.jar
 ```
 
 2 Run the application with the Java agent
@@ -687,7 +703,7 @@ Now we will use the JMX java agent to instrument the application.
 4 Download the JMX java agent
 
 ```bash
-  wget -O jmx_prometheus_javaagent.jar https://github.com/prometheus/jmx_prometheus_javaagent/releases/latest/download/jmx_prometheus_javaagent.jar
+  wget -O jmx_prometheus_javaagent.jar https://github.com/prometheus/jmx_exporter/releases/download/1.3.0/jmx_prometheus_javaagent-1.3.0.jar
 ```
 
 5 Run the docker container with the JMX java agent and override the entrypoint
@@ -715,3 +731,13 @@ Now we will use the JMX java agent to instrument the application.
 - [ ] Check the metrics `curl http://localhost:8081/metrics | grep jvm_memory_bytes_committed`
 
 The code and the docker image are untouched, but the application can be instrumented !
+
+7 Now we will use a docker compose and a sidecar pattern
+
+```bash
+  docker compose up
+```
+
+- [ ] Check the metrics `curl http://localhost:8081/metrics`
+- [ ] Check the metrics `curl http://localhost:8081/metrics | grep jvm_threads`
+- [ ] Check the metrics `curl http://localhost:8081/metrics | grep jvm_memory_bytes_committed`

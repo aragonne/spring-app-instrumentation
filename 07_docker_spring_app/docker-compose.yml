@@ -1,0 +1,44 @@
+services:
+  # Application Spring Boot
+  spring-app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    networks:
+      - monitoring
+    depends_on:
+      - jmx-agent
+    volumes:
+      - ./shared-data:/shared
+    entrypoint: >
+      sh -c "
+        echo 'Waiting for JMX agent to be ready...' &&
+        while [ ! -f /shared/jmx_prometheus_javaagent.jar ]; do sleep 1; done &&
+        echo 'JMX agent found, starting application...' && ls -al /shared && chmod -R o+x /shared &&
+        java -javaagent:/shared/jmx_prometheus_javaagent.jar=8081:/shared/jmx_config.yml -jar /app/spring-demo.jar
+      "
+
+  # Sidecar JMX Agent
+  jmx-agent:
+    image: debian:latest
+    volumes:
+      - ./shared-data:/shared
+      - ./jmx_prometheus_javaagent.jar:/tmp/jmx_prometheus_javaagent.jar
+      - ./jmx_config.yml:/tmp/jmx_config.yml
+    networks:
+      - monitoring
+    command: >
+      sh -c "
+        cp /tmp/jmx_prometheus_javaagent.jar /shared/jmx_prometheus_javaagent.jar &&
+        cp /tmp/jmx_config.yml /shared/jmx_config.yml
+        "
+
+volumes:
+  shared-data:
+
+networks:
+  monitoring:
+    driver: bridge
