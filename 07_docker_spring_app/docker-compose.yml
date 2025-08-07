@@ -1,9 +1,7 @@
 services:
   # Application Spring Boot
   spring-app:
-    build:
-      context: .
-      dockerfile: dockerfile
+    image: spring-demo-otel
     ports:
       - "8080:8080"
       - "8081:8081"
@@ -13,13 +11,8 @@ services:
       - jmx-agent
     volumes:
       - ./shared-data:/shared
-    entrypoint: >
-      sh -c "
-        echo 'Waiting for JMX agent to be ready...' &&
-        while [ ! -f /shared/jmx_prometheus_javaagent.jar ]; do sleep 1; done &&
-        echo 'JMX agent found, starting application...' && ls -al /shared && chmod -R o+x /shared &&
-        java -javaagent:/shared/jmx_prometheus_javaagent.jar=8081:/shared/jmx_config.yml -jar /app/spring-demo.jar
-      "
+    command: >
+      java -javaagent:/shared/jmx_prometheus_javaagent.jar=8081:/shared/jmx_config.yml -jar /app/spring-demo.jar
 
   # Sidecar JMX Agent
   jmx-agent:
