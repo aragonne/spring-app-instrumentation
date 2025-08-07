@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.exemple.demo.service.MetricsService;
+
 @RestController
 public class BonjourEQLController {
+
+    @Autowired
+    private MetricsService metricsService;
 
     @GetMapping("/bonjour-eql")
     public String direBonjourEQL() {

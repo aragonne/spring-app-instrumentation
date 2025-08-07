@@ -389,7 +389,7 @@ We will use the Java agent from JMX. It is easy to use and it is a standard Java
 2 Run the application with the Java agent
 
 ```bash
-  java -javaagent:jmx_prometheus_javaagent.jar -jar target/spring-demo-1.0.0.jar
+java -javaagent:jmx_prometheus_javaagent.jar=8081:jmx_config.yml -jar target/spring-demo-1.0.0.jar
 ```
 
 3 Check the metrics
