@@ -1,0 +1,84 @@
+---
+# JMX Exporter configuration for Spring Boot application
+
+# JMX agent configuration - no hostPort or jmxUrl needed when running as Java agent
+startDelaySeconds: 0
+# No need to specify connection details when running as a Java agent
+# The agent automatically connects to the JVM it's running in
+sslProxyHost: 
+sslProxyPort: 
+
+# Rules for lowercasing output metric names
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+
+# Global JVM metrics
+rules:
+  # Standard JVM metrics
+  - pattern: 'java.lang<type=OperatingSystem><>(.+):'
+    name: jvm_os_$1
+    type: GAUGE
+    attrNameSnakeCase: true
+  
+  - pattern: 'java.lang<type=Memory><HeapMemoryUsage>(.+):'
+    name: jvm_memory_heap_$1
+    type: GAUGE
+    attrNameSnakeCase: true
+  
+  - pattern: 'java.lang<type=Memory><NonHeapMemoryUsage>(.+):'
+    name: jvm_memory_nonheap_$1
+    type: GAUGE
+    attrNameSnakeCase: true
+
+  - pattern: 'java.lang<type=MemoryPool, name=(.+)><>Usage.(.+):'
+    name: jvm_memory_pool_$1_$2
+    type: GAUGE
+    labels:
+      pool: "$1"
+
+  - pattern: 'java.lang<type=GarbageCollector, name=(.+)><>(.+):'
+    name: jvm_gc_$2
+    type: GAUGE
+    labels:
+      gc: "$1"
+
+  - pattern: 'java.lang<type=Threading><>(.+):'
+    name: jvm_threading_$1
+    type: GAUGE
+    attrNameSnakeCase: true
+
+  - pattern: 'java.lang<type=ClassLoading><>(.+):'
+    name: jvm_classloading_$1
+    type: GAUGE
+
+  # Tomcat metrics
+  - pattern: 'Tomcat<type=ThreadPool, name="(.+)"><>(.+):'
+    name: tomcat_threadpool_$2
+    labels:
+      name: "$1"
+
+  - pattern: 'Tomcat<type=GlobalRequestProcessor, name="(.+)"><>(.+):'
+    name: tomcat_requestprocessor_$2
+    labels:
+      name: "$1"
+
+  # Spring Boot metrics
+  - pattern: 'org.springframework.boot<type=(.+), name=(.+)><>(.+):'
+    name: spring_boot_$1_$2_$3
+    type: GAUGE
+
+  # HTTP metrics
+  - pattern: 'Tomcat<type=GlobalRequestProcessor, name="(.+)"><>requestCount:'
+    name: tomcat_servlet_request_total
+    type: COUNTER
+    labels:
+      name: "$1"
+
+  # Database connection pool metrics
+  - pattern: 'com.zaxxer.hikari<type=Pool, name=(.+)><>(.+):'
+    name: hikari_$2
+    labels:
+      pool: "$1"
+
+  # Default catch-all for the rest
+  - pattern: ".*"
