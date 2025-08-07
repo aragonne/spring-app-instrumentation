@@ -2,4 +2,6 @@ FROM openjdk:17-jdk-slim
 
 COPY my-app/target/spring-demo-1.0.0.jar /app/spring-demo.jar
 
-ENTRYPOINT ["java", "-jar", "/app/spring-demo.jar"]
+RUN chmod +x /app/spring-demo.jar
+
+CMD "java -jar /app/spring-demo.jar"

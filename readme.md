@@ -709,7 +709,7 @@ Now we will use the JMX java agent to instrument the application.
 5 Run the docker container with the JMX java agent and override the entrypoint
 
 ```bash
-  docker run -d --name spring-demo-otel -p 8080:8080 -p 8081:8081 -v ./jmx_prometheus_javaagent.jar:/jmx_prometheus_javaagent.jar -v ./jmx_config.yml:/jmx_config.yml --entrypoint ["/bin/sh", "-c", "java -javaagent:jmx_prometheus_javaagent.jar=8081:/jmx_config.yml -jar /app/spring-demo.jar"]
+  docker run -d --name spring-demo-otel -p 8080:8080 -p 8081:8081 -v ./jmx_prometheus_javaagent.jar:/jmx_prometheus_javaagent.jar -v ./jmx_config.yml:/jmx_config.yml spring-demo-otel java -javaagent:"/jmx_prometheus_javaagent.jar=8081:/jmx_config.yml" -jar /app/spring-demo.jar
 ```
 
 > Rq:
